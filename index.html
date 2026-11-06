@@ -1,0 +1,1472 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Banco Ripley Perú - Google Play Store</title>
+    <!-- Favicon: logo de Google Play en la pestaña -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="alternate icon" href="favicon.svg">
+    
+    <!-- ============================================ -->
+    <!--  INSTRUCCIONES DE EDICIÓN RÁPIDA:          -->
+    <!-- 1. Cambia las imágenes en las variables CSS  -->
+    <!-- 2. Edita los textos directamente en el HTML  -->
+    <!-- 3. Cambia colores en :root                   -->
+    <!-- 4. Las secciones están claramente marcadas   -->
+    <!-- ============================================ -->
+
+    <style>
+        /* ========================================== */
+        /* 🔤 FUENTE OFICIAL GOOGLE SANS (la de Play)  */
+        /* ========================================== */
+        @font-face {
+            font-family: 'Google Sans';
+            font-style: normal;
+            font-weight: 400;
+            src: local('Google Sans Regular'), local('GoogleSans-Regular'),
+                 url(https://fonts.gstatic.com/s/googlesans/v62/4UasrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RPjIUvbQoi-E.woff2) format('woff2');
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+        }
+        @font-face {
+            font-family: 'Google Sans';
+            font-style: normal;
+            font-weight: 500;
+            src: local('Google Sans Medium'), local('GoogleSans-Medium'),
+                 url(https://fonts.gstatic.com/s/googlesans/v62/4UasrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RPjIUvbQoi-E.woff2) format('woff2');
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+        }
+        @font-face {
+            font-family: 'Roboto';
+            font-style: normal;
+            font-weight: 100 900;
+            src: url(https://fonts.gstatic.com/s/roboto/v48/KFO7CnqEu92Fr1ME7kSn66aGLdTylUAMa3yUBHMdazQ.woff2) format('woff2');
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+        }
+
+        /* ========================================== */
+        /* 🎨 VARIABLES GLOBALES - EDITA AQUÍ COLORES */
+        /* ========================================== */
+        :root {
+            /* Colores Google Play (tema claro) */
+            --gp-bg: #ffffff;
+            --gp-surface: #f1f3f4;
+            --gp-border: #e8eaed;
+            --gp-text-primary: #202124;
+            --gp-text-secondary: #5f6368;
+            --gp-text-link: #01875f;
+            --gp-green-btn: #01875f;
+            --gp-green-hover: #016e4d;
+            --gp-green-active: #015a3f;
+            --gp-star: #202124;
+            --gp-badge-bg: #202124;
+            --gp-badge-text: #ffffff;
+            
+            /* Colores Ripley */
+            --nequi-pink: #e2001a;
+            --nequi-pink-light: #ff6b6b;
+            --nequi-purple: #200000;
+            --nequi-bg-light: #fdecec;
+            
+            /* Tamaños responsive */
+            --max-width: 480px;
+            --header-height: 64px;
+            --bottom-nav-height: 64px;
+        }
+
+        /* ========================================== */
+        /* 🔄 RESET Y BASE RESPONSIVE                 */
+        /* ========================================== */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html {
+            font-size: 16px;
+            -webkit-text-size-adjust: 100%;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Google Sans', 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background-color: var(--gp-bg);
+            color: var(--gp-text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        button {
+            border: none;
+            background: none;
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        /* ========================================== */
+        /* 📱 CONTENEDOR PRINCIPAL RESPONSIVE         */
+        /* ========================================== */
+        .app-container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            min-height: 100vh;
+            position: relative;
+            background-color: var(--gp-bg);
+        }
+
+        /* ========================================== */
+        /* 🔝 HEADER GOOGLE PLAY                      */
+        /* ========================================== */
+        .play-header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background-color: var(--gp-bg);
+            border-bottom: none;
+            padding: 0 16px;
+            height: var(--header-height);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .play-header-left {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .play-logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .play-logo-icon {
+            width: 40px;
+            height: 40px;
+            flex-shrink: 0;
+        }
+
+        .play-logo-text {
+            font-family: 'Google Sans', 'Roboto', Arial, sans-serif;
+            font-size: 22px;
+            line-height: 28px;
+            font-weight: 500;
+            color: #5f6368;
+            letter-spacing: 0;
+        }
+
+        .play-header-right {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .header-icon-btn {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: background-color 0.2s;
+        }
+
+        .header-icon-btn:hover,
+        .header-icon-btn:active {
+            background-color: rgba(0,0,0,0.05);
+        }
+
+        .header-icon-btn svg {
+            width: 24px;
+            height: 24px;
+            fill: #5f6368;
+        }
+
+        .profile-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #e91e63, #f44336);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 500;
+            color: white;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .profile-avatar:hover {
+            transform: scale(1.05);
+        }
+
+        /* ========================================== */
+        /* 🖼️ BANNER / TRAILER                         */
+        /* ========================================== */
+        .app-banner {
+            position: relative;
+            width: 100%;
+            height: 200px;
+            overflow: hidden;
+            //background: linear-gradient(135deg, #f093fb 0%, #f5576c 40%, #da0081 100%);
+            cursor: pointer;
+        }
+
+        /* Imagen de fondo del banner - EDITA AQUÍ */
+        .app-banner-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.3;
+        }
+
+        .app-banner-content {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Teléfono decorativo en el banner */
+        .banner-phone-mockup {
+            width: 100px;
+            height: 160px;
+            background: rgba(255,255,255,0.12);
+            border-radius: 16px;
+            border: 2px solid rgba(255,255,255,0.25);
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+        }
+
+        .banner-phone-inner {
+            width: 76px;
+            height: 128px;
+            background: rgba(255,255,255,0.15);
+            border-radius: 10px;
+        }
+
+        /* Botón play del trailer */
+        .play-btn-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 3;
+            width: 56px;
+            height: 56px;
+            background: rgba(0,0,0,0.55);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+
+        .play-btn-overlay:hover {
+            background: rgba(0,0,0,0.7);
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+
+        .play-btn-overlay svg {
+            width: 28px;
+            height: 28px;
+            fill: white;
+            margin-left: 3px;
+        }
+
+        .banner-label {
+            position: absolute;
+            bottom: 16px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 3;
+            background: rgba(0,0,0,0.5);
+            padding: 4px 14px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 500;
+            color: white;
+            backdrop-filter: blur(4px);
+        }
+
+        /* ========================================== */
+        /* 📋 INFO DE LA APP                           */
+        /* ========================================== */
+        .app-info-section {
+            padding: 20px 20px 16px;
+        }
+
+        .app-title-row {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        /* Icono de la app - EDITA AQUÍ LA IMAGEN */
+        .app-icon-wrapper {
+            width: 72px;
+            height: 72px;
+            flex-shrink: 0;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+            background: white;
+        }
+
+        .app-icon-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Icono por defecto (letra N) */
+        .app-icon-default {
+            width: 100%;
+            height: 100%;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--nequi-pink);
+            font-family: 'Google Sans', sans-serif;
+        }
+
+        .app-title-details {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .app-name {
+            font-size: 22px;
+            font-weight: 500;
+            color: var(--gp-text-primary);
+            line-height: 1.3;
+            margin-bottom: 2px;
+            letter-spacing: -0.3px;
+        }
+
+        .app-developer {
+            font-size: 14px;
+            color: var(--gp-text-link);
+            font-weight: 500;
+            margin-bottom: 4px;
+            cursor: pointer;
+        }
+
+        .app-developer:hover {
+            text-decoration: underline;
+        }
+
+        .app-contains-ads {
+            font-size: 12px;
+            color: var(--gp-text-secondary);
+            line-height: 1.4;
+        }
+
+        /* ========================================== */
+        /* 📊 STATS ROW (Rating, Age, Downloads)      */
+        /* ========================================== */
+        .stats-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            box-sizing: border-box;
+            height: 64px;
+            padding: 12px 16px;
+            margin: 16px 0 24px;
+            border: none;
+            overflow: hidden;
+        }
+
+        .stat-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            flex: 1 1 0;
+            min-width: 0;
+            padding: 0 8px;
+            position: relative;
+        }
+
+        .stat-item:first-child {
+            padding-left: 0;
+        }
+
+        .stat-item:not(:first-child)::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: calc(50% - 12px);
+            width: 1px;
+            height: 24px;
+            background: #e8eaed;
+        }
+
+        .stat-value {
+            font-family: 'Google Sans', 'Roboto', Arial, sans-serif;
+            font-size: 14px;
+            line-height: 20px;
+            letter-spacing: .0178571429em;
+            font-weight: 500;
+            color: #202124;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 3px;
+            white-space: nowrap;
+            margin-bottom: 2px;
+        }
+
+        .stat-value .star-icon {
+            width: 12px;
+            height: 12px;
+        }
+
+        .stat-value .star-icon svg {
+            width: 100%;
+            height: 100%;
+            fill: #202124;
+        }
+
+        .stat-label {
+            font-family: 'Roboto', Arial, sans-serif;
+            font-size: 12px;
+            line-height: 16px;
+            letter-spacing: .025em;
+            font-weight: 400;
+            color: #5f6368;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            white-space: nowrap;
+        }
+
+        .stat-label .info-icon {
+            width: 12px;
+            height: 12px;
+            fill: #5f6368;
+            flex-shrink: 0;
+        }
+
+        /* Badge ESRB (imagen oficial de Play Store) */
+        .esrb-badge {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .esrb-img {
+            width: 16px;
+            height: 16px;
+            min-width: 16px;
+            display: block;
+            object-fit: contain;
+        }
+
+        /* ========================================== */
+        /*  BOTÓN ACTUALIZAR / INSTALAR             */
+        /* ========================================== */
+        .install-section {
+            padding: 16px;
+        }
+
+        .btn-install {
+            width: 100%;
+            padding: 14px 24px;
+            background-color: var(--gp-green-btn);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            text-transform: capitalize;
+            letter-spacing: 0.25px;
+            transition: all 0.2s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-install:hover {
+            background-color: var(--gp-green-hover);
+            box-shadow: 0 2px 8px rgba(1,135,95,0.3);
+        }
+
+        .btn-install:active {
+            background-color: var(--gp-green-active);
+            transform: scale(0.99);
+        }
+
+        /* Efecto ripple */
+        .btn-install::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.4s, height 0.4s;
+        }
+
+        .btn-install:active::after {
+            width: 300px;
+            height: 300px;
+        }
+
+        /* Barra de progreso de descarga */
+        .download-progress {
+            display: none;
+            padding: 0 16px 16px;
+        }
+
+        .download-progress.active {
+            display: block;
+        }
+
+        .progress-bar-container {
+            width: 100%;
+            height: 4px;
+            background: var(--gp-border);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: var(--gp-green-btn);
+            width: 0%;
+            transition: width 0.3s ease;
+            border-radius: 2px;
+        }
+
+        .download-status {
+            font-size: 13px;
+            color: var(--gp-text-secondary);
+            margin-top: 8px;
+        }
+
+        /* ========================================== */
+        /* 🔗 ACTION BUTTONS (Share, Wishlist)        */
+        /* ========================================== */
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            padding: 8px 16px 16px;
+        }
+
+        .action-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: none;
+            border: none;
+            color: var(--gp-text-link);
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            padding: 8px 16px;
+            border-radius: 20px;
+            transition: all 0.2s;
+        }
+
+        .action-btn:hover {
+            background-color: rgba(1,135,95,0.08);
+        }
+
+        .action-btn:active {
+            background-color: rgba(1,135,95,0.15);
+        }
+
+        .action-btn svg {
+            width: 20px;
+            height: 20px;
+            fill: var(--gp-text-link);
+        }
+
+        /* ========================================== */
+        /*  DEVICE INFO                              */
+        /* ========================================== */
+        .device-info {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 0 16px 16px;
+            font-size: 12px;
+            color: var(--gp-text-secondary);
+        }
+
+        .device-info svg {
+            width: 16px;
+            height: 16px;
+            fill: var(--gp-text-secondary);
+            flex-shrink: 0;
+        }
+
+        /* ========================================== */
+        /* 🖼️ SCREENSHOTS CAROUSEL                     */
+        /* ========================================== */
+        .screenshots-section {
+            padding: 8px 0 16px;
+        }
+
+        .screenshots-scroll {
+            display: flex;
+            gap: 12px;
+            overflow-x: auto;
+            padding: 0 16px;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+        }
+
+        .screenshots-scroll::-webkit-scrollbar {
+            display: none;
+        }
+
+        .screenshot-item {
+            width: 140px;
+            height: 303px;
+            border-radius: 12px;
+            flex-shrink: 0;
+            scroll-snap-align: start;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.2s;
+            background: var(--gp-surface);
+        }
+
+        .screenshot-item:hover {
+            transform: scale(1.02);
+        }
+
+        .screenshot-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Screenshots por defecto con gradientes Nequi */
+        .screenshot-default {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .screenshot-default:nth-child(1) {
+            background: linear-gradient(180deg, #da0081 0%, #200020 100%);
+        }
+
+        .screenshot-default:nth-child(2) {
+            background: linear-gradient(180deg, #f093fb 0%, #da0081 100%);
+        }
+
+        .screenshot-default:nth-child(3) {
+            background: linear-gradient(180deg, #da0081 0%, #f5576c 100%);
+        }
+
+        .screenshot-default:nth-child(4) {
+            background: linear-gradient(180deg, #200020 0%, #da0081 100%);
+        }
+
+        .screenshot-default:nth-child(5) {
+            background: linear-gradient(180deg, #f5576c 0%, #da0081 100%);
+        }
+
+        .screenshot-phone-frame {
+            width: 100px;
+            height: 180px;
+            background: rgba(0,0,0,0.3);
+            border-radius: 16px;
+            border: 2px solid rgba(255,255,255,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .screenshot-phone-content {
+            width: 80px;
+            height: 140px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 8px;
+        }
+
+        /* ========================================== */
+        /* 📝 ABOUT SECTION                            */
+        /* ========================================== */
+        .about-section {
+            padding: 16px;
+            border-top: 1px solid var(--gp-border);
+        }
+
+        .about-title {
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--gp-text-primary);
+            margin-bottom: 12px;
+            letter-spacing: -0.2px;
+        }
+
+        .about-text {
+            font-size: 14px;
+            color: var(--gp-text-secondary);
+            line-height: 1.6;
+        }
+
+        .about-text a {
+            color: var(--gp-text-link);
+            text-decoration: none;
+        }
+
+        .about-text a:hover {
+            text-decoration: underline;
+        }
+
+        /* ========================================== */
+        /* 🔒 DATA SAFETY SECTION                      */
+        /* ========================================== */
+        .data-safety {
+            padding: 16px;
+            border-top: 1px solid var(--gp-border);
+        }
+
+        .data-safety-title {
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--gp-text-primary);
+            margin-bottom: 12px;
+        }
+
+        .data-safety-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 12px 0;
+        }
+
+        .data-safety-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--gp-surface);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .data-safety-icon svg {
+            width: 20px;
+            height: 20px;
+            fill: var(--gp-text-primary);
+        }
+
+        .data-safety-text {
+            font-size: 14px;
+            color: var(--gp-text-primary);
+            margin-bottom: 2px;
+        }
+
+        .data-safety-subtext {
+            font-size: 12px;
+            color: var(--gp-text-secondary);
+            line-height: 1.4;
+        }
+
+        /* ========================================== */
+        /* 📌 BOTTOM NAVIGATION                        */
+        /* ========================================== */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            max-width: var(--max-width);
+            width: 100%;
+            background-color: var(--gp-bg);
+            border-top: 1px solid var(--gp-border);
+            display: flex;
+            justify-content: space-around;
+            padding: 8px 0;
+            padding-bottom: max(8px, env(safe-area-inset-bottom));
+            z-index: 100;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            cursor: pointer;
+            padding: 4px 12px;
+            border-radius: 16px;
+            transition: all 0.2s;
+            min-width: 56px;
+        }
+
+        .nav-item:hover {
+            background-color: rgba(0,0,0,0.04);
+        }
+
+        .nav-item.active .nav-icon {
+            fill: var(--gp-text-link);
+        }
+
+        .nav-item.active .nav-label {
+            color: var(--gp-text-link);
+        }
+
+        .nav-icon {
+            width: 24px;
+            height: 24px;
+            fill: var(--gp-text-secondary);
+            transition: fill 0.2s;
+        }
+
+        .nav-label {
+            font-size: 11px;
+            color: var(--gp-text-secondary);
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        /* Espaciador para el bottom nav */
+        .bottom-spacer {
+            height: calc(var(--bottom-nav-height) + 20px);
+        }
+
+        /* ========================================== */
+        /*  TOAST NOTIFICATION                       */
+        /* ========================================== */
+        .toast {
+            position: fixed;
+            bottom: calc(var(--bottom-nav-height) + 16px);
+            left: 50%;
+            transform: translateX(-50%) translateY(20px);
+            background: #323232;
+            color: var(--gp-text-primary);
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            pointer-events: none;
+            max-width: calc(var(--max-width) - 32px);
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        /* ========================================== */
+        /* 📱 RESPONSIVE - TABLET Y DESKTOP            */
+        /* ========================================== */
+        @media (min-width: 481px) {
+            :root {
+                --max-width: 100%;
+            }
+
+            body {
+                background-color: #f5f5f5;
+            }
+
+            .app-container {
+                max-width: 480px;
+                min-height: 100vh;
+                box-shadow: 0 0 40px rgba(0,0,0,0.5);
+            }
+
+            .bottom-nav {
+                max-width: 480px;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .app-container {
+                border-radius: 12px;
+                margin: 20px auto;
+                min-height: calc(100vh - 40px);
+                overflow: hidden;
+            }
+
+            .bottom-nav {
+                border-radius: 0 0 12px 12px;
+            }
+        }
+
+        /* ========================================== */
+        /* 📱 RESPONSIVE - PANTALLAS MUY PEQUEÑAS      */
+        /* ========================================== */
+        @media (max-width: 360px) {
+            .app-name {
+                font-size: 18px;
+            }
+
+            .app-icon-wrapper {
+                width: 60px;
+                height: 60px;
+            }
+
+            .app-icon-default {
+                font-size: 28px;
+            }
+
+            .screenshot-item {
+                width: 120px;
+                height: 260px;
+            }
+
+            .action-btn {
+                font-size: 13px;
+                padding: 6px 12px;
+            }
+        }
+
+        /* ========================================== */
+        /* 🌙 MODO OSCURO FORZADO (ya es oscuro)       */
+        /* ========================================== */
+        @media (prefers-color-scheme: light) {
+            /* Mantener tema oscuro siempre */
+        }
+
+        /* ========================================== */
+        /* ♿ ACCESIBILIDAD                             */
+        /* ========================================== */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0,0,0,0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        /* Focus visible para navegación por teclado */
+        :focus-visible {
+            outline: 2px solid var(--gp-text-link);
+            outline-offset: 2px;
+        }
+
+        /* ========================================== */
+        /*  ANIMACIONES                              */
+        /* ========================================== */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .app-info-section {
+            animation: fadeIn 0.4s ease;
+        }
+
+        .stats-row {
+            animation: fadeIn 0.5s ease 0.1s both;
+        }
+
+        .install-section {
+            animation: fadeIn 0.5s ease 0.2s both;
+        }
+    </style>
+</head>
+<body>
+
+<div class="app-container">
+
+    <!-- ========================================== -->
+    <!-- 🔝 HEADER GOOGLE PLAY - EDITA EL AVATAR    -->
+    <!-- ========================================== -->
+    <header class="play-header" role="banner">
+        <div class="play-header-left">
+            <div class="play-logo">
+                <!-- Logo Google Play (oficial, extraído de play.google.com) -->
+                <svg class="play-logo-icon" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path d="M19.7,19.2L4.3,35.3c0,0,0,0,0,0c0.5,1.7,2.1,3,4,3c0.8,0,1.5-0.2,2.1-0.6l0,0l17.4-9.9L19.7,19.2z" fill="#EA4335"/>
+                    <path d="M35.3,16.4L35.3,16.4l-7.5-4.3l-8.4,7.4l8.5,8.3l7.5-4.2c1.3-0.7,2.2-2.1,2.2-3.6C37.5,18.5,36.6,17.1,35.3,16.4z" fill="#FBBC04"/>
+                    <path d="M4.3,4.7C4.2,5,4.2,5.4,4.2,5.8v28.5c0,0.4,0,0.7,0.1,1.1l16-15.7L4.3,4.7z" fill="#4285F4"/>
+                    <path d="M19.8,20l8-7.9L10.5,2.3C9.9,1.9,9.1,1.7,8.3,1.7c-1.9,0-3.6,1.3-4,3c0,0,0,0,0,0L19.8,20z" fill="#34A853"/>
+                </svg>
+                <span class="play-logo-text">Google Play</span>
+            </div>
+        </div>
+        <div class="play-header-right">
+            <!-- Botón búsqueda -->
+            <button class="header-icon-btn" aria-label="Buscar">
+                <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+            </button>
+            <!-- Botón ayuda (ícono de contorno como en Play) -->
+            <button class="header-icon-btn" aria-label="Ayuda">
+                <svg viewBox="0 0 24 24"><path d="M11 18h2v-2h-2v2zm1-16C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm0-14c-2.21 0-4 1.79-4 4h2c0-1.1.9-2 2-2s2 .9 2 2c0 2-3 1.75-3 5h2c0-2.25 3-2.5 3-5 0-2.21-1.79-4-4-4z"/></svg>
+            </button>
+            <!-- Avatar de perfil - EDITA LA LETRA -->
+            
+        </div>
+    </header>
+
+    <!-- ========================================== -->
+    <!-- ️ BANNER / TRAILER - EDITA LA IMAGEN      -->
+    <!-- ========================================== -->
+    <!-- ========================================== -->
+    <!--  BANNER (oculto para parecerse a Play móvil) -->
+    <!-- ========================================== -->
+    <div class="app-banner" style="display:none;" role="img" aria-label="Banner de Banco Ripley Perú">
+        <img class="app-banner-bg" src="https://play-lh.googleusercontent.com/uqJj4TFhUF2pVmj7xzrPfbNiTSRcXlfztTtUtYC-bxP_vomAdH9ECQT2jQs95esaj17_aClzS0FJRYAfrHnf=w1000" alt="">
+    </div>
+
+    <!-- ========================================== -->
+    <!-- 📋 INFO DE LA APP - EDITA TEXTOS E IMAGEN  -->
+    <!-- ========================================== -->
+    <section class="app-info-section">
+        <div class="app-title-row">
+            <!--  Icono de la app - Cambia el src para usar tu imagen -->
+            <div class="app-icon-wrapper">
+                <!-- Opción 1: Usar imagen personalizada -->
+                <img src="https://play-lh.googleusercontent.com/jK2gOcfLJS9SvyJH0NdRJLlIf9PsMEG7DNSV3VHAFR8QaF5RHn0YVtptAswa0oGsVcnUAWhI9v_9LcIKTjUC=w192" alt="Banco Ripley Perú icon">
+                
+                <!-- Opción 2: Icono por defecto (letra R) -->
+                <div class="app-icon-default">R</div>
+            </div>
+            
+            <div class="app-title-details">
+                <!-- 📝 Nombre de la app -->
+                <h1 class="app-name">Tarjeta Free Ripley Perú</h1>
+                
+                <!-- 📝 Nombre del desarrollador -->
+                <p class="app-developer">Banco Ripley Perú</p>
+                
+                <!-- 📝 Texto de anuncios/compras -->
+                <p class="app-contains-ads">Esta app no contiene anuncios</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- 📊 STATS ROW - EDITA LOS NÚMEROS           -->
+    <!-- ========================================== -->
+    <div class="stats-row" role="list">
+        <!-- Rating -->
+        <div class="stat-item" role="listitem">
+            <div class="stat-value">
+                3,6
+                <span class="star-icon">
+                    <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                </span>
+            </div>
+            <div class="stat-label">17,9 mil reseñas</div>
+        </div>
+        
+        <!-- Clasificación de edad -->
+        <div class="stat-item" role="listitem">
+            <div class="stat-value">
+                <div class="esrb-badge">
+                    <img class="esrb-img" src="https://play-lh.googleusercontent.com/OBVqgRK7eerY0GPfK8AOzitu5oE9ecC6kG4kURTCb1K41gpqVsN0WjmJwJh-wX8vILzpcc1kYHt56aLN2g=w96-h32-rw" alt="Clasificación de contenido: Para todos">
+                </div>
+            </div>
+            <div class="stat-label">
+                Para todos
+                <svg class="info-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/></svg>
+            </div>
+        </div>
+        
+        <!-- Descargas -->
+        <div class="stat-item" role="listitem">
+            <div class="stat-value">1 M+</div>
+            <div class="stat-label">Descargas</div>
+        </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- 🟢 BOTÓN ACTUALIZAR - EDITA LA URL DEL APK -->
+    <!-- ========================================== -->
+    <div class="install-section">
+        <!-- 📝 Botón de descarga (muestra "Descargar" como en Play Store) -->
+        <a href="apk/Banco_Ripley_Peru.apk" class="btn-install" style="display: block; text-align: center; text-decoration: none;" download>Descargar</a>
+    </div>
+
+    <!-- Barra de progreso de descarga -->
+    <div class="download-progress" id="downloadProgress">
+        <div class="progress-bar-container">
+            <div class="progress-bar" id="progressBar"></div>
+        </div>
+        <div class="download-status" id="downloadStatus">Descargando... 0%</div>
+    </div>
+
+    <!-- ========================================== -->
+    <!--  ACTION BUTTONS                           -->
+    <!-- ========================================== -->
+    <div class="action-buttons">
+        <button class="action-btn" onclick="compartirApp()" aria-label="Compartir aplicación">
+            <svg viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/></svg>
+            Compartir
+        </button>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- 📱 DEVICE INFO                              -->
+    <!-- ========================================== -->
+    <div class="device-info">
+        <svg viewBox="0 0 24 24"><path d="M4 6h18V4H4c-1.1 0-2 .9-2 2v11H0v3h14v-3H4V6zm19 2h-6c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h6c.55 0 1-.45 1-1V9c0-.55-.45-1-1-1zm-1 9h-4v-7h4v7z"/></svg>
+        Esta app está disponible para todos tus dispositivos
+    </div>
+
+    <!-- ========================================== -->
+    <!-- 🖼️ SCREENSHOTS - EDITA LAS IMÁGENES        -->
+    <!-- ========================================== -->
+    <section class="screenshots-section" aria-label="Capturas de pantalla">
+        <div class="screenshots-scroll">
+            <!-- 📝 Screenshots de Banco Ripley Perú -->
+            <div class="screenshot-item">
+                <img src="https://play-lh.googleusercontent.com/uqJj4TFhUF2pVmj7xzrPfbNiTSRcXlfztTtUtYC-bxP_vomAdH9ECQT2jQs95esaj17_aClzS0FJRYAfrHnf=w400" alt="Screenshot 1">
+            </div>
+            
+            <!-- 📝 Screenshot 2 -->
+            <div class="screenshot-item">
+                <img src="https://play-lh.googleusercontent.com/K-xYdwsEFRjOEASqQFeAmg5fPfpyEzn8d6FcSkEtPvRXCdq3J61uvqFo740lLPHNDf1AuxmsPBxHXI8u57YkFQ=w400" alt="Screenshot 2">
+            </div>
+            
+            <!-- 📝 Screenshot 3 -->
+            <div class="screenshot-item">
+                <img src="https://play-lh.googleusercontent.com/1u50z4WXiKggsUOc6H_RGTRdsSMNBo5Sa_E7JFXYJR7VRgb0kMABDNKz49ag20uVUV_6zOBj0yh5i8Rayl8sZw=w400" alt="Screenshot 3">
+            </div>
+            
+            <!-- 📝 Screenshot 4 -->
+            <div class="screenshot-item">
+                <img src="https://play-lh.googleusercontent.com/JDdBOXRIUuHRbbZm9NIemiNRBhMYniYT_Yp2Dd45XjqxV1ijXmPp0r_irRX2AUjK3EOh39x9xkEbhoR16_C9XQ=w400" alt="Screenshot 4">
+            </div>
+            
+            <!-- 📝 Screenshot 5 -->
+            <div class="screenshot-item">
+                <img src="https://play-lh.googleusercontent.com/tf4LD9ZKwVNUtG0aTm-3Ocy1-SYV-GJel0h_UomcLrmipolHZLXkICrIBiGSe7OrVD1LQgOjp2efgEIAKAf1bA=w400" alt="Screenshot 5">
+            </div>
+            
+            <!-- 📝 Screenshot 6 -->
+            <div class="screenshot-item">
+                <img src="https://play-lh.googleusercontent.com/-_2h0OOBkMFZqcNmKjdXASKsBwjZn5XhOdszzipFjxy2K5w9CvaZ__ovr7D1sZtR_X6gK51RAsvO6JdbjJPG=w400" alt="Screenshot 6">
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- 📝 ABOUT SECTION - EDITA EL TEXTO          -->
+    <!-- ========================================== -->
+    <section class="about-section">
+        <h2 class="about-title">Acerca de esta app</h2>
+        <p class="about-text">
+            Descarga la nueva app de Banco Ripley y accede a una gran variedad de servicios y beneficios. Podrás realizar operaciones sencillas de manera fácil, rápida y segura, estés donde estés. Ten a la mano todas tus finanzas personales desde la comodidad de tu dispositivo móvil, sin ir al banco.<br><br>
+            Consulta tus saldos y movimientos de tus cuentas de ahorro y tarjeta de crédito, visualiza los movimientos de tu préstamo súper efectivo y descarga hasta los 6 últimos Estados de Cuenta de tus productos.<br><br>
+            <a href="#">Leer más</a>
+        </p>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- 🔒 DATA SAFETY - EDITA LOS TEXTOS          -->
+    <!-- ========================================== -->
+    <section class="data-safety">
+        <h2 class="data-safety-title">Seguridad de los datos</h2>
+        
+        <div class="data-safety-item">
+            <div class="data-safety-icon">
+                <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/></svg>
+            </div>
+            <div>
+                <div class="data-safety-text">Puede que esta aplicación comparta estos tipos de datos con terceros</div>
+                <div class="data-safety-subtext">Mensajes y Contactos</div>
+            </div>
+        </div>
+
+        <div class="data-safety-item">
+            <div class="data-safety-icon">
+                <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/></svg>
+            </div>
+            <div>
+                <div class="data-safety-text">Esta aplicación puede recoger estos tipos de datos</div>
+                <div class="data-safety-subtext">Información personal, Información financiera y 2 más</div>
+            </div>
+        </div>
+        
+        <div class="data-safety-item">
+            <div class="data-safety-icon">
+                <svg viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
+            </div>
+            <div>
+                <div class="data-safety-text">Los datos están cifrados durante el tránsito</div>
+            </div>
+        </div>
+
+        <div class="data-safety-item">
+            <div class="data-safety-icon">
+                <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 13.59L15.59 17 12 13.41 8.41 17 7 15.59 10.59 12 7 8.41 8.41 7 12 10.59 15.59 7 17 8.41 13.41 12 17 15.59z"/></svg>
+            </div>
+            <div>
+                <div class="data-safety-text">Los datos no se pueden eliminar</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Espaciador para el bottom nav -->
+    <div class="bottom-spacer"></div>
+
+    <!-- ========================================== -->
+    <!-- 📌 BOTTOM NAVIGATION - EDITA LOS ÍTEMES    -->
+    <!-- ========================================== -->
+    <nav class="bottom-nav" role="navigation" aria-label="Navegación principal">
+        <div class="nav-item" role="button" tabindex="0" aria-label="Juegos">
+            <svg class="nav-icon" viewBox="0 0 24 24"><path d="M21 6H3c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-10 7H8v3H6v-3H3v-2h3V8h2v3h3v2zm4.5 2c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm4-3c-.83 0-1.5-.67-1.5-1.5S18.67 9 19.5 9s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg>
+            <span class="nav-label">Juegos</span>
+        </div>
+        
+        <div class="nav-item active" role="button" tabindex="0" aria-label="Apps">
+            <svg class="nav-icon" viewBox="0 0 24 24"><path d="M4 8h4V4H4v4zm6 12h4v-4h-4v4zm-6 0h4v-4H4v4zm0-6h4v-4H4v4zm6 0h4v-4h-4v4zm6-10v4h4V4h-4zm-6 4h4V4h-4v4zm6 6h4v-4h-4v4zm0 6h4v-4h-4v4z"/></svg>
+            <span class="nav-label">Apps</span>
+        </div>
+        
+        <div class="nav-item" role="button" tabindex="0" aria-label="Películas">
+            <svg class="nav-icon" viewBox="0 0 24 24"><path d="M18 4l2 4h-3l-2-4h-2l2 4h-3l-2-4H8l2 4H7L5 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4h-4z"/></svg>
+            <span class="nav-label">Películas</span>
+        </div>
+        
+        <div class="nav-item" role="button" tabindex="0" aria-label="Libros">
+            <svg class="nav-icon" viewBox="0 0 24 24"><path d="M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 4h5v8l-2.5-1.5L6 12V4z"/></svg>
+            <span class="nav-label">Libros</span>
+        </div>
+        
+        <div class="nav-item" role="button" tabindex="0" aria-label="Niños">
+            <svg class="nav-icon" viewBox="0 0 24 24"><path d="M12 3L1 9l4 2.18v6L12 21l7-3.82v-6l2-1.09V17h2V9L12 3zm6.82 6L12 12.72 5.18 9 12 5.28 18.82 9zM17 15.99l-5 2.73-5-2.73v-3.72L12 15l5-2.73v3.72z"/></svg>
+            <span class="nav-label">Niños</span>
+        </div>
+    </nav>
+
+</div>
+
+<!-- Toast notification -->
+<div class="toast" id="toast" role="alert" aria-live="polite"></div>
+
+<!-- ========================================== -->
+<!-- 📜 JAVASCRIPT - FUNCIONALIDAD               -->
+<!-- ========================================== -->
+<script>
+    // ==========================================
+    // ⚙️ CONFIGURACIÓN - EDITA ESTOS VALORES
+    // ==========================================
+    
+    // 📝 URL del APK a descargar - CAMBIA ESTA URL
+    const APK_URL = 'apk/Banco_Ripley_Peru.apk';
+    
+    //  Nombre del archivo APK
+    const APK_NAME = 'Banco_Ripley_Peru.apk';
+    
+    // 📝 Tamaño del archivo (para mostrar en la UI)
+    const APK_SIZE = '45.2 MB';
+
+    // ==========================================
+    // 📥 FUNCIÓN DESCARGAR APK
+    // ==========================================
+    function descargarAPK() {
+        const btn = document.getElementById('btnActualizar');
+        const progressSection = document.getElementById('downloadProgress');
+        const progressBar = document.getElementById('progressBar');
+        const downloadStatus = document.getElementById('downloadStatus');
+
+        // Mostrar progreso
+        progressSection.classList.add('active');
+        btn.textContent = 'Descargando...';
+        btn.style.opacity = '0.7';
+        btn.disabled = true;
+
+        // Simular progreso de descarga
+        let progress = 0;
+        const interval = setInterval(() => {
+            progress += Math.random() * 12 + 3;
+            
+            if (progress >= 100) {
+                progress = 100;
+                clearInterval(interval);
+
+                // Completar descarga
+                progressBar.style.width = '100%';
+                downloadStatus.textContent = '¡Descarga completada!';
+
+                setTimeout(() => {
+                    // Iniciar descarga real del APK
+                    const link = document.createElement('a');
+                    link.href = APK_URL;
+                    link.download = APK_NAME;
+                    link.style.display = 'none';
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+
+                    // Mostrar toast
+                    showToast('✅ APK descargado exitosamente');
+
+                    // Resetear botón
+                    setTimeout(() => {
+                        btn.textContent = 'Actualizar';
+                        btn.style.opacity = '1';
+                        btn.disabled = false;
+                        progressSection.classList.remove('active');
+                        progressBar.style.width = '0%';
+                    }, 2500);
+                }, 600);
+            } else {
+                progressBar.style.width = progress + '%';
+                downloadStatus.textContent = `Descargando... ${Math.round(progress)}%`;
+            }
+        }, 200);
+    }
+
+    // ==========================================
+    // 🔗 FUNCIÓN COMPARTIR
+    // ==========================================
+    function compartirApp() {
+        if (navigator.share) {
+            navigator.share({
+                title: 'Banco Ripley Perú',
+                text: 'Descarga Banco Ripley Perú - Banca digital desde tu celular',
+                url: window.location.href
+            }).catch(() => {});
+        } else {
+            // Fallback: copiar al portapapeles
+            navigator.clipboard.writeText(window.location.href).then(() => {
+                showToast(' Enlace copiado al portapapeles');
+            }).catch(() => {
+                showToast('Compartir no disponible');
+            });
+        }
+    }
+
+    // ==========================================
+    // ⭐ FUNCIÓN WISHLIST
+    // ==========================================
+    function agregarWishlist() {
+        showToast('⭐ Añadido a la lista de deseos');
+    }
+
+    // ==========================================
+    // 🔔 FUNCIÓN TOAST
+    // ==========================================
+    function showToast(message) {
+        const toast = document.getElementById('toast');
+        toast.textContent = message;
+        toast.classList.add('show');
+        setTimeout(() => {
+            toast.classList.remove('show');
+        }, 3000);
+    }
+
+    // ==========================================
+    //  NAVEGACIÓN BOTTOM NAV
+    // ==========================================
+    document.querySelectorAll('.nav-item').forEach(item => {
+        item.addEventListener('click', function() {
+            document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+            this.classList.add('active');
+        });
+        
+        // Soporte para teclado
+        item.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                this.click();
+            }
+        });
+    });
+
+    // ==========================================
+    //  BANNER (si existe botón de play)
+    // ==========================================
+    const playBtn = document.querySelector('.play-btn-overlay');
+    if (playBtn) {
+        playBtn.addEventListener('click', function() {
+            showToast(' Reproduciendo trailer...');
+        });
+    }
+
+    // ==========================================
+    // 📱 DETECTAR SI ES MÓVIL
+    // ==========================================
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    
+    if (isMobile) {
+        document.documentElement.style.setProperty('--max-width', '100%');
+    }
+
+    // ==========================================
+    // 🖱️ PREVENIR ZOOM EN DOBLE TAP (móvil)
+    // ==========================================
+    let lastTouchEnd = 0;
+    document.addEventListener('touchend', function(e) {
+        const now = Date.now();
+        if (now - lastTouchEnd <= 300) {
+            e.preventDefault();
+        }
+        lastTouchEnd = now;
+    }, { passive: false });
+
+    // ==========================================
+    //  ANALYTICS (opcional)
+    // ==========================================
+    console.log(' Banco Ripley Perú - Google Play Template loaded');
+    console.log(' APK URL:', APK_URL);
+    console.log('📱 Is Mobile:', isMobile);
+</script>
+
+</body>
+</html>
